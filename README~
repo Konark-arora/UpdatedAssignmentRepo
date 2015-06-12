@@ -1,13 +1,13 @@
 	 	 Application Architecture
 
-	src
-	 ├─ Modules
-                     ├─ Constants (URLConstants resides here)
-                     └─ projectModule
-                                    ├─ controller (containing Activities,Buisness logic here)				
-                                    ├─ models
-                                    	├─ listener (Callback listeners)
-                                    	├─ Asynctask (Used as a model for making network call)
+src
+ ├─ Modules
+     ├─ Constants (URLConstants resides here)
+     └─ projectModule
+                    ├─ controller (containing Activities,Buisness logic here)				
+                    ├─ models
+                    	├─ listener (Callback listeners)
+                    	├─ Asynctask (Used as a model for making network call)
 				
 
 Assignment Output 
