@@ -1,0 +1,34 @@
+	 	 Application Architecture
+
+src
+ ├─ Modules
+     ├─ Constants (URLConstants resides here)
+     └─ projectModule
+                    ├─ controller (containing Activities,Buisness logic here)				
+                    ├─ models
+                    	├─ listener (Callback listeners)
+                    	├─ Asynctask (Used as a model for making network call)
+				
+
+Assignment Output 
+
+1. Truecaller10thCharacterRequest: 
+For this point, returned the 10th Character of the html response received which with given url returns html response as <!DOCTYPE  so 10th character output is a space character“ ”
+
+2. TruecallerEvery10thCharacterRequest:
+For this point, returned a StringBuilder with the html response received. 
+
+3. TruecallerWordCounterRequest:
+For this point, First creating a hashmap with index as words and its count in html as value and then build a StringBuilder from the hashmap and returned it back with the callback         
+
+
+Other Best Practices Used ::
+
+Used Factory design pattern to get data callback for separate TextViews. 
+Factory determines which data structure to be used as per the problem statement and respond with the correct corresponding class which contains the data retrieval logic.
+Advantages of using it :: Extensibility (Open-Closed Principle) , Unit-Testability, Reuse
+
+All network related call has been made through background thread via usage of Async Task
+
+Used styles, colors, dimen, strings.xml to make code clear and reusable.
+
