@@ -1,4 +1,4 @@
-package com.example.konark.truecallerassignment.model.listeners;
+package com.example.konark.truecallerassignment.module.model.listeners;
 
 /**
  * This is the callback listener

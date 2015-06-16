@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme" >
 
         <activity
-            android:name="com.example.konark.truecallerassignment.controller.TrueCallerAssignmentActivity"
+            android:name=".module.controller.TrueCallerAssignmentActivity"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

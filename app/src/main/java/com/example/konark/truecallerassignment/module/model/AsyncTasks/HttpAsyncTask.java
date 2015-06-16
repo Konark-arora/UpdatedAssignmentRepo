@@ -1,10 +1,10 @@
-package com.example.konark.truecallerassignment.model.AsyncTasks;
+package com.example.konark.truecallerassignment.module.model.AsyncTasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.konark.truecallerassignment.controller.TrueCallerAssignmentActivity;
+import com.example.konark.truecallerassignment.module.controller.TrueCallerAssignmentActivity;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -25,24 +25,31 @@ public class HttpAsyncTask extends AsyncTask<String, Void, String> {
     private Context context;
     private String url;
 
-    public HttpAsyncTask(Context context,String url){
+    public HttpAsyncTask(Context context, String url) {
         this.context = context;
         this.url = url;
     }
 
+    /*
+     * Async task doInBackground method to call url on background thread
+     */
     @Override
     protected String doInBackground(String... urls) {
-
         return GET(url);
     }
 
-    // onPostExecute displays the results of the AsyncTask.
+    /*
+     * onPostExecute displays the results of the AsyncTask.
+     */
     @Override
     protected void onPostExecute(String result) {
         ((TrueCallerAssignmentActivity) (context)).onSuccess(result);
     }
 
-    public static String GET(String url){
+    /*
+     * Network get request call from AsyncTask.
+     */
+    public static String GET(String url) {
         InputStream inputStream = null;
         String result = "";
         try {
@@ -57,7 +64,7 @@ public class HttpAsyncTask extends AsyncTask<String, Void, String> {
             inputStream = httpResponse.getEntity().getContent();
 
             // convert inputstream to string
-            if(inputStream != null)
+            if (inputStream != null)
                 result = convertInputStreamToString(inputStream);
             else
                 result = "Did not work!";
@@ -69,11 +76,14 @@ public class HttpAsyncTask extends AsyncTask<String, Void, String> {
         return result;
     }
 
+    /*
+     * String response from Input String.
+     */
     private static String convertInputStreamToString(InputStream inputStream) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         String line = "";
         String result = "";
-        while((line = bufferedReader.readLine()) != null)
+        while ((line = bufferedReader.readLine()) != null)
             result += line;
 
         inputStream.close();

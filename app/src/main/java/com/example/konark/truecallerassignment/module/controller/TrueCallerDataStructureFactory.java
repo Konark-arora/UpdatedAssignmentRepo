@@ -1,4 +1,4 @@
-package com.example.konark.truecallerassignment.controller;
+package com.example.konark.truecallerassignment.module.controller;
 
 /**
  * Created by konark on 11/6/15.

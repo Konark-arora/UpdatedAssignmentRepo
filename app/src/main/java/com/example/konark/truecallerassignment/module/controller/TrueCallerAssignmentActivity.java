@@ -1,10 +1,7 @@
-package com.example.konark.truecallerassignment.controller;
+package com.example.konark.truecallerassignment.module.controller;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Color;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -13,16 +10,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.konark.truecallerassignment.R;
+import com.example.konark.truecallerassignment.appControllers.BaseActivity;
 import com.example.konark.truecallerassignment.constants.URLConstant;
-import com.example.konark.truecallerassignment.model.AsyncTasks.HttpAsyncTask;
-import com.example.konark.truecallerassignment.model.listeners.CallBackListener;
+import com.example.konark.truecallerassignment.module.model.AsyncTasks.HttpAsyncTask;
+import com.example.konark.truecallerassignment.module.model.listeners.CallBackListener;
+
+import java.util.Map;
 
 
 /**
  * Created by konark on 11/6/15.
  */
 
-public class TrueCallerAssignmentActivity extends Activity implements CallBackListener {
+public class TrueCallerAssignmentActivity extends BaseActivity implements CallBackListener {
 
     private ProgressDialog progressDialog;
     private Button AssignmentButton;
@@ -82,22 +82,35 @@ public class TrueCallerAssignmentActivity extends Activity implements CallBackLi
     public void onSuccess(String response) {
         TrueCallerDataStructureFactory dataParsedPerProblemStatement = new TrueCallerDataStructureFactory();
 
-        // Get an object of find10thChar from the Problem Statement Data Structure factory class.
+        StringBuilder everyTengthChar = new StringBuilder("Every 10th character response string :: ");
+        StringBuilder wordsCount = new StringBuilder("Words Counter");
+
+        // Get an object of find10thChar from the factory class.
         Find10thCharacter find10thChar = (Find10thCharacter)(dataParsedPerProblemStatement.getDataStructureType("find10thChar", response));
         StringBuilder tengthChar = find10thChar.getData();
 
-        //get a map for every10thChar in the response from the Problem Statement Data Structure factory class.
+        //get a map for every10thChar in the response from the factory class.
         Every10thCharacter every10thCharacter = (Every10thCharacter)(dataParsedPerProblemStatement.getDataStructureType("every10thChar", response));
-        StringBuilder every10thChar = every10thCharacter.getData();
+        StringBuilder every10thCharResponse = every10thCharacter.getData();
+        everyTengthChar.append(every10thCharResponse);
 
-        //get a map for words occurences in the response from the Problem Statement Data Structure factory class.
+        //Get a map for words occurences in the response from the factory class.
         WordsCount wordsOccurencesCount = (WordsCount)(dataParsedPerProblemStatement.getDataStructureType("wordsCount", response));
-        StringBuilder wordsCount = wordsOccurencesCount.getData();
+        Map<String, Integer> occurrences = wordsOccurencesCount.getData();
+
+        StringBuilder wordsCountResponse = new StringBuilder();
+        for (String word : occurrences.keySet()) {
+            if(word.equalsIgnoreCase("truecaller")) {
+                Integer count = occurrences.get(word);
+                wordsCountResponse.append("  Word : 'TrueCaller' " + " Count : '" + count + "'");
+            }
+        }
+        wordsCount.append(wordsCountResponse);
 
         hideProgressDialog();
 
         textView10thCharacter.setText(tengthChar);
-        textViewEvery10thCharacter.setText(every10thChar);
+        textViewEvery10thCharacter.setText(everyTengthChar);
         textViewWordCounter.setText(wordsCount);
     }
 
@@ -106,41 +119,6 @@ public class TrueCallerAssignmentActivity extends Activity implements CallBackLi
      */
     public void onFailed(String message) {
         hideProgressDialog();
-    }
-
-    /**
-     * Show progress dialog with passed message.
-     * @param message
-     */
-    public void showProgressDialog(String message) {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage(message);
-        progressDialog.show();
-    }
-
-    /**
-     * Hide progress dialog with proper handling of exception related to context leak.
-     */
-    public void hideProgressDialog() {
-        try {
-            if (progressDialog != null && progressDialog.isShowing()) {
-                progressDialog.dismiss();
-            }
-        } catch (Exception e) {
-
-        } finally {
-            progressDialog = null;
-        }
-    }
-
-    public boolean isConnected(){
-        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected())
-            return true;
-        else
-            return false;
     }
 
     /**

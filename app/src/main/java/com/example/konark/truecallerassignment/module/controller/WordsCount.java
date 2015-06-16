@@ -1,4 +1,4 @@
-package com.example.konark.truecallerassignment.controller;
+package com.example.konark.truecallerassignment.module.controller;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -15,15 +15,16 @@ public class WordsCount implements ProblemStatementInterface {
     }
 
     @Override
-    public StringBuilder getData() {
+    public Map<String, Integer> getData() {
 
         Map<String, Integer> occurrences = new LinkedHashMap<String, Integer>();
 
         // Split string into words after every space or newline
         String[] tokens = dataResponse.split(" |\\\n");
-        StringBuilder wordsCount = new StringBuilder();
+
 
         for (String word : tokens) {
+            word = word.toLowerCase();
             Integer oldCount = occurrences.get(word);
             if (oldCount == null) {
                 oldCount = 0;
@@ -31,11 +32,6 @@ public class WordsCount implements ProblemStatementInterface {
             occurrences.put(word, oldCount + 1);
         }
 
-        for (String word : occurrences.keySet()) {
-            Integer count = occurrences.get(word);
-            wordsCount.append(word + ":" + count + "  ");
-        }
-
-        return wordsCount;
+        return occurrences;
     }
 }
