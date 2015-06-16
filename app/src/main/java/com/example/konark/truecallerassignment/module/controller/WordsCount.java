@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * Created by konark on 11/6/15.
  */
-public class WordsCount implements ProblemStatementInterface {
+public class WordsCount implements TrueCallerFactoryInterface {
 
     private String dataResponse;
 

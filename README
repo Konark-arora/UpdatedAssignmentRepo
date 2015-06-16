@@ -2,9 +2,17 @@
 
 src
  ├─ Modules
+     ├─ AppController
+	   ├─ BaseActivity (Common methods containing basic requirements of Activities resides here like checkInternetConnectivity,ShowToast)	 
      ├─ Constants (URLConstants resides here)
      └─ projectModule
-                    ├─ controller (containing Activities,Buisness logic here)				
+                    ├─ controller (containing Activities,Buisness logic here)
+			├─ TrueCallerAssignmentActivity (Activity used for the problem statement)
+                    	├─ TrueCallerFactoryInterface 
+			├─ TrueCallerAssignmentFactory (Factory class for determining class type) 
+                    	├─ Find10thCharacter
+			├─ Every10thCharacter
+                    	├─ WordsCount						
                     ├─ models
                     	├─ listener (Callback listeners)
                     	├─ Asynctask (Used as a model for making network call)

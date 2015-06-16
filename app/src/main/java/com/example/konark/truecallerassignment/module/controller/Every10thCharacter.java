@@ -3,7 +3,7 @@ package com.example.konark.truecallerassignment.module.controller;
 /**
  * Created by konark on 11/6/15.
  */
-public class Every10thCharacter implements ProblemStatementInterface {
+public class Every10thCharacter implements TrueCallerFactoryInterface {
 
     private String dataResponse;
 

@@ -80,7 +80,7 @@ public class TrueCallerAssignmentActivity extends BaseActivity implements CallBa
      * Successful callback from the server
      */
     public void onSuccess(String response) {
-        TrueCallerDataStructureFactory dataParsedPerProblemStatement = new TrueCallerDataStructureFactory();
+        TrueCallerAssignmentFactory dataParsedPerProblemStatement = new TrueCallerAssignmentFactory();
 
         StringBuilder everyTengthChar = new StringBuilder("Every 10th character response string :: ");
         StringBuilder wordsCount = new StringBuilder("Words Counter");
